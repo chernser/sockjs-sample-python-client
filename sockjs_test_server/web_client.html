@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>SockJs Web Client</title>
+    <style type="text/css">
+
+        #messages {
+            display: block;
+            width: 30em;
+            height: 10em;
+            border: solid 1px #808080;
+            background-color: #d3d3d3;
+            color: #00008b;
+            text-indent: 1em;
+        }
+
+        p {
+            margin: 1px;
+        }
+    </style>
+</head>
+
+<div>
+    <label>Messages</label>
+    <div id='messages'></div>
+</div>
+
+<script type="text/javascript" src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+
+    function out(msg) {
+        $("#messages").append('<p>' + msg + '</p>');
+    }
+
+    $(document).ready(function() {
+        connect();
+    });
+
+
+    function connect() {
+        var url = 'http://' + location.host + '/socket.io';
+        out("connecting: " + url);
+
+        var sock = new SockJS(url);
+        sock.onopen = function() {
+            out("connected");
+            sock.send("iamlistener");
+        };
+        sock.onmessage = function(msg) {
+            out("message: " + msg);
+        };
+        sock.onclose = function() {
+            out("disconnected");
+        };
+    }
+</script>
+</html>

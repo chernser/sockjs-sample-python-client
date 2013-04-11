@@ -1,0 +1,11 @@
+{
+    "name"        : "sockjs-sample-server",
+    "version"     : "0.0.0-unreleasable",
+    "description" : "very simple sockjs server",
+    "keywords"    : ["socjs"],
+    "private"     : true,
+    "dependencies": { 
+	"sockjs": "~0.3.5",
+ 	"underscore": "~1.4.3"
+    }
+}
